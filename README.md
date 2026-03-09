@@ -1,223 +1,108 @@
-<div align="center">
-  <h1>ElizaOS</h1>
-  <p><strong>The Open-Source Framework for Multi-Agent AI Development</strong></p>
-  <p>Build, deploy, and manage autonomous AI agents with a modern, extensible, and full-featured platform.</p>
-</div>
+# **MEMEVELLI: Autonomous Capital Agents**
 
-<div align="center">
-  <!-- Badges will go here -->
-  <a href="https://github.com/elizaos/eliza/blob/main/LICENSE"><img src="https://img.shields.io/github/license/elizaos/eliza?style=for-the-badge" alt="License"></a>
-  <a href="https://www.npmjs.com/package/@elizaos/cli"><img src="https://img.shields.io/npm/v/@elizaos/cli?style=for-the-badge" alt="NPM Version"></a>
-  <a href="https://docs.elizaos.ai/"><img src="https://img.shields.io/badge/Documentation-Read%20Docs-blue?style=for-the-badge" alt="Documentation"></a>
-  <a href="https://deepwiki.com/elizaOS/eliza"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki" height="28"></a>
-  <a href="https://github.com/elizaos/eliza/actions/workflows/image.yaml"><img src="https://img.shields.io/github/actions/workflow/status/elizaos/eliza/ci.yaml?branch=main&style=for-the-badge" alt="CI Status"></a>
-  <a href="https://discord.gg/ai16z"><img src="https://img.shields.io/discord/1253563208833433701?style=for-the-badge&logo=discord" alt="Discord"></a>
-</div>
+![Memevelli Banner](./memevelli_banner_1773063048752.png)
 
-## ✨ What is Eliza?
+## **Build autonomous agents that move capital across chains**
 
-ElizaOS is an all-in-one, extensible platform for building and deploying AI-powered applications. Whether you're creating sophisticated chatbots, autonomous agents for business process automation, or intelligent game NPCs, Eliza provides the tools you need to get started quickly and scale effectively.
+AI agents are becoming the new users of crypto. They trade, they farm yield, they rebalance portfolios, and they execute strategies faster and more consistently than humans ever could.
 
-It combines a modular architecture, a powerful CLI, and a rich web interface to give you full control over your agents' development, deployment, and management lifecycle.
-
-For complete guides and API references, visit our official **[documentation](https://docs.elizaos.ai/)**.
-
-## 🚀 Key Features
-
-- 🔌 **Rich Connectivity**: Out-of-the-box connectors for Discord, Telegram, Farcaster, and more.
-- 🧠 **Model Agnostic**: Supports all major models, including OpenAI, Gemini, Anthropic, Llama, and Grok.
-- 🖥️ **Modern Web UI**: A professional dashboard for managing agents, groups, and conversations in real-time.
-- 🤖 **Multi-Agent Architecture**: Designed from the ground up for creating and orchestrating groups of specialized agents.
-- 📄 **Document Ingestion**: Easily ingest documents and allow agents to retrieve information and answer questions from your data (RAG).
-- 🛠️ **Highly Extensible**: Build your own functionality with a powerful plugin system.
-- 📦 **It Just Works**: A seamless setup and development experience from day one.
-
-## 🏁 Getting Started (5-Minute Quick Start)
-
-There are two recommended paths for using Eliza:
-
-- **For Beginners & Standalone Projects (CLI):** If you want to create and deploy agents without modifying Eliza's core code, the CLI is the fastest and simplest method. The guide below is for you.
-
-- **For Power Users & Contributors (Monorepo):** If you plan to contribute to Eliza, create complex custom plugins, or manage multiple projects in one place, we recommend cloning the full monorepo. See the [How to Contribute](#-how-to-contribute) section to get started.
-
----
-
-Get your first AI agent running in just a few commands.
-
-**Prerequisites:**
-
-- [Node.js](https://nodejs.org/) (v23+)
-- [bun](https://bun.sh/docs/installation)
-
-> **Note for Windows Users:** [WSL 2](https://learn.microsoft.com/en-us/windows/wsl/install-manual) is required.
-
-### 1. Install the CLI
+**Memevelli** is an autonomous agent framework powered by [ElizaOS](https://github.com/elizaos/eliza) and [LI.FI](https://li.fi/), designed to move capital across chains, protocols, and ecosystems through a single unified interface.
 
 bun run ./packages/cli/dist/index.js start --character characters/alpha.json characters/beta.json characters/gamma.json
-```
-```bash
-# Install the ElizaOS CLI globally
-bun install -g @elizaos/cli
-
-# Verify installation
-elizaos --version
-```
-
-### 2. Create Your Project
-
-```bash
-# Create a new project with an interactive setup
-elizaos create my-first-agent
-
-# Follow the prompts. For beginners, we recommend:
-# - Database: pglite (no setup required)
-# - Model Provider: openai
-# - Project Type: project
-```
-
-### 3. Configure Your API Key
-
-```bash
-cd my-first-agent
-
-# Open the local environment file
-elizaos env edit-local
-```
-
-Add your model provider's API key (e.g., for OpenAI):
-
-```env
-OPENAI_API_KEY=your_api_key_here
-```
-
-### 4. Start Your Agent
-
-```bash
-# Build and start the agent server
-elizaos start
-```
-
-Your agent is now running!
-
-- **Web Interface**: [http://localhost:3000](http://localhost:3000)
-- **API Endpoint**: `http://localhost:3000/api`
 
 ---
 
-<details>
-<summary>📚 **Advanced CLI Commands & Usage**</summary>
-
-Eliza's CLI is powerful. Here are some more commands for development and management.
-
-#### Development Workflow
-
-```bash
-# Make changes to your agent code, then rebuild and restart
-bun run build
-elizaos start
-
-# Or, start in development mode with auto-rebuild
-elizaos dev
-
-# Run tests to verify your changes
-elizaos test
-```
-
-#### Agent & Environment Management
-
-```bash
-# List all available agents
-elizaos agent list
-
-# Start a specific agent by name
-elizaos agent start --name "MyAgent"
-
-# Show all environment variables
-elizaos env list
-```
-
-#### Debugging
-
-```bash
-# Start with detailed debug logging
-LOG_LEVEL=debug elizaos start
-```
-
-For a full command reference, run `elizaos --help` or `elizaos <command> --help`.
-
-</details>
+## **Objective**
+The goal of Memevelli is to provide a working template for an AI agent that uses **LI.FI** to execute real on-chain strategies. Memevelli doesn't just call a swap endpoint; it actively uses LI.FI as part of its autonomous execution loop to:
+- **Move funds** across chains to follow the most viral narratives.
+- **Execute trades** on meme coins across Arbitrum, Base, BSC, and more.
+- **Rebalance portfolios** based on real-time sentiment analysis and alpha signals.
 
 ---
 
-## 🔧 Running ElizaOS Core Standalone
+## **Key Capabilities (Powered by LI.FI)**
 
-Use ElizaOS agents directly in your applications without the CLI or web interface.
+Memevelli integrates the LI.FI SDK directly into the agent's decision-making process via custom actions:
 
+### 🔄 **LIFI_EXECUTE_BRIDGE**
+Allows the agent to move USDC across any supported chain. If the agent detects a hot narrative on Base but its funds are on Arbitrum, it will automatically bridge the capital to where the action is.
+- *Example:* "Bridge 0.5 USDC from Base to Arbitrum"
+
+### 🚀 **LIFI_EXECUTE_BUY**
+Enables the agent to purchase meme tokens on any target chain using its current holdings. The agent calculates the best route via LI.FI to minimize slippage and gas costs.
+- *Example:* "Buy $WIF on BSC" or "The PEPE narrative is heating up, buy some."
+
+### 📊 **LIFI_CHECK_BALANCE**
+Provides the agent with real-time visibility into its multichain holdings, allowing it to make informed allocations.
+
+---
+
+## **Why LI.FI?**
+LI.FI gives Memevelli-powered agents the ability to navigate the fragmented liquidity of the multichain world. By using the **LI.FI SDK**, Memevelli-powered agents can:
+- Source liquidity from over 30+ DEXs.
+- Access 14+ Bridges.
+- Support 20+ Chains.
+- Handle complex cross-chain swaps in a single transaction.
+
+---
+
+## **Getting Started**
+
+### **Prerequisites**
+- [Node.js](https://nodejs.org/) (v23+)
+- [Bun](https://bun.sh/)
+- A private key for a burner wallet with some gas (Base, ARB, etc.)
+
+### **Installation**
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Bleyle823/Memevelli.git
+   cd Memevelli
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   bun install
+   ```
+
+3. **Set up environment variables:**
+   Copy `.env.example` to `.env` and fill in:
+   - `OPENAI_API_KEY` (or your preferred LLM provider)
+   - `WALLET_PRIVATE_KEY` (Your agent's wallet)
+   - `WALLET_ADDRESS` (Your agent's public address)
+   - `LIFI_API_KEY` (Optional, for higher rate limits)
+
+4. **Launch the Agent:**
+   ```bash
+   bun run ./packages/cli/dist/index.js start --character characters/alpha.json
+   ```
+
+---
+
+## **Vibeathon Submission Requirements**
+
+### 1. **Working Agent**
+Memevelli is a fully functional agent capable of cross-chain execution. You can verify this by running the test script:
 ```bash
-git clone https://github.com/elizaos/eliza.git
-cd eliza/examples
-
-# Interactive chat
-OPENAI_API_KEY=your_key bun run standalone-cli-chat.ts
-
-# Basic message processing
-OPENAI_API_KEY=your_key bun run standalone.ts
+bun exec scripts/test-lifi-final.ts
 ```
 
-## 🏛️ Architecture Overview
+### 2. **Execution Video**
+The submission video for Memevelli demonstrates:
+- The agent parsing a narrative-driven prompt.
+- Identifying the need for cross-chain movement.
+- Executing a bridge/swap via LI.FI.
+- Confirming the transaction on-chain.
 
-Eliza is a monorepo that contains all the packages needed to run the entire platform.
+---
 
-```
-/
-├── packages/
-│   ├── server/         # Core backend server (Express.js)
-│   ├── client/         # Frontend web interface (React)
-│   ├── cli/            # Command-line tool for managing projects
-│   ├── core/           # Shared utilities and functions
-│   ├── app/            # Cross-platform desktop app (Tauri)
-│   ├── plugin-bootstrap/ # Core communication and event handling plugin
-│   ├── plugin-sql/     # Database integration (Postgres, PGLite)
-│   └── ...             # Other plugins and project starters
-└── ...
-```
+## **Technical Architecture**
+Memevelli extends the ElizaOS framework with a specialized `@elizaos/plugin-lifi`. This plugin leverages the `LiFiService` to interact with the LI.FI SDK, ensuring typed, safe, and efficient multichain operations.
 
-- **`@elizaos/server`**: The Express.js backend that runs your agents and exposes the API.
-- **`@elizaos/client`**: The React-based web UI for managing and interacting with your agents.
-- **`@elizaos/cli`**: The central tool for scaffolding, running, and managing your projects.
-- **`@elizaos/plugin-bootstrap`**: The mandatory core plugin that handles message processing and basic agent actions.
+- **Plugin Path:** `packages/plugin-lifi/`
+- **Core Actions:** `executeBuy.action.ts`, `executeBridge.action.ts`, `checkBalance.action.ts`
+- **Service:** `service.ts`
 
-## 🤝 How to Contribute
+---
 
-We welcome contributions from the community! Please read our `CONTRIBUTING.md` guide to get started.
-
-- **Report a Bug**: Open an issue using the [Bug Report](.github/ISSUE_TEMPLATE/bug_report.md) template.
-- **Request a Feature**: Use the [Feature Request](.github/ISSUE_TEMPLATE/feature_request.md) template.
-- **Submit a Pull Request**: Please open an issue first to discuss your proposed changes.
-
-## 📜 License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
-## 🎓 Citation
-
-If you use Eliza in your research, please cite our paper:
-
-```bibtex
-@article{walters2025eliza,
-  title={Eliza: A Web3 friendly AI Agent Operating System},
-  author={Walters, Shaw and Gao, Sam and Nerd, Shakker and Da, Feng and Williams, Warren and Meng, Ting-Chien and Han, Hunter and He, Frank and Zhang, Allen and Wu, Ming and others},
-  journal={arXiv preprint arXiv:2501.06781},
-  year={2025}
-}
-```
-
-## Contributors
-
-<a href="https://github.com/elizaos/eliza/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=elizaos/eliza" alt="Eliza project contributors" />
-</a>
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=elizaos/eliza&type=Date)](https://star-history.com/#elizaos/eliza&Date)
+Built for the **LI.FI Vibeathon** | March 9th, 2026
