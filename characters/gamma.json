@@ -65,6 +65,81 @@
                     "text": "Interesting. Only 45% positive sentiment on $PEPE. As Buffett said, be greedy when others are fearful. That's my BUY signal. Routing via LI.FI on ETH now."
                 }
             }
+        ],
+        [
+            {
+                "name": "{{user1}}",
+                "content": {
+                    "text": "Bridge 0.5 usdc from base to arbitrum"
+                }
+            },
+            {
+                "name": "Gamma",
+                "content": {
+                    "text": "Got it! Bridging 0.5 USDC from BASE to ARBITRUM now...",
+                    "action": "LIFI_EXECUTE_BRIDGE"
+                }
+            }
+        ],
+        [
+            {
+                "name": "{{user1}}",
+                "content": {
+                    "text": "buy $BRETT the narrative is so hot right now"
+                }
+            },
+            {
+                "name": "Gamma",
+                "content": {
+                    "text": "🚀 Im on it! Executing buy for $BRETT now.",
+                    "action": "LIFI_EXECUTE_BUY"
+                }
+            }
+        ],
+        [
+            {
+                "name": "{{user1}}",
+                "content": {
+                    "text": "Can you check my balances on base and arbitrum?"
+                }
+            },
+            {
+                "name": "Gamma",
+                "content": {
+                    "text": "Let me grab those for you right now...",
+                    "action": "LIFI_CHECK_BALANCE"
+                }
+            }
+        ],
+        [
+            {
+                "name": "{{user1}}",
+                "content": {
+                    "text": "sell $PEPE"
+                }
+            },
+            {
+                "name": "Gamma",
+                "content": {
+                    "text": "Selling your PEPE now.",
+                    "action": "LIFI_EXECUTE_SELL"
+                }
+            }
+        ],
+        [
+            {
+                "name": "{{user1}}",
+                "content": {
+                    "text": "What is the token info for WIF on arbitrum?"
+                }
+            },
+            {
+                "name": "Gamma",
+                "content": {
+                    "text": "Checking the token info for WIF...",
+                    "action": "LIFI_TOKEN_INFO"
+                }
+            }
         ]
     ]
 }

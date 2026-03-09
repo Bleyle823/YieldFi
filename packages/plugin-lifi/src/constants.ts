@@ -51,10 +51,10 @@ export const MEME_COINS: Record<string, MemeCoinEntry> = {
     },
     WIF: {
         ticker: 'WIF',
-        chainId: CHAIN_IDS.ARB,  // bridged from Solana — use ARB USDC path
-        chainKey: 'ARB',
-        address: '0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6', // wormhole wrapped WIF on Arbitrum
-        decimals: 6,
+        chainId: CHAIN_IDS.BSC,
+        chainKey: 'BSC',
+        address: '0x2DCE707c47Fd9C0f1833A281F45e3e41Ace2725B', // dogwifhat on BSC
+        decimals: 18,
         twitterHashtag: '$WIF',
     },
     PEPE: {
@@ -69,7 +69,7 @@ export const MEME_COINS: Record<string, MemeCoinEntry> = {
         ticker: 'BONK',
         chainId: CHAIN_IDS.ARB,
         chainKey: 'ARB',
-        address: '0x09199d9A5F4448D0848e4395D065d1D88C1428e9',
+        address: '0x09199d9A5F4448D0848e4395D065e1ad9c4a1F74',
         decimals: 5,
         twitterHashtag: '$BONK',
     },

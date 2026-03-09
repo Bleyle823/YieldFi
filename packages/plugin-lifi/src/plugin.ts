@@ -18,6 +18,7 @@ import { getStatusAction } from './actions/getStatus.action.js';
 import { getChainsAction } from './actions/getChains.action.js';
 import { getTokenInfoAction } from './actions/getTokenInfo.action.js';
 import { checkBalanceAction } from './actions/checkBalance.action.js';
+import { executeBridgeAction } from './actions/executeBridge.action.js';
 
 // Providers
 import { portfolioProvider } from './providers/portfolio.provider.js';
@@ -90,6 +91,7 @@ export const lifiPlugin: Plugin = {
         getChainsAction,
         getTokenInfoAction,
         checkBalanceAction,
+        executeBridgeAction,
     ],
 
     providers: [

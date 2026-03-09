@@ -46,6 +46,7 @@ const VIEM_CHAINS: Record<number, any> = {
 
 export class LiFiService extends Service {
     static serviceType = 'lifi';
+    get serviceType() { return LiFiService.serviceType; }
     capabilityDescription = 'LI.FI cross-chain swap and bridge service for NarrativeTrader';
 
     // ── Position management
@@ -260,6 +261,32 @@ export class LiFiService extends Service {
             unrealizedPnlUSD,
             totalPnlUSD: realizedPnlUSD + unrealizedPnlUSD,
         };
+    }
+
+    async getUsdcBalance(chainId: number): Promise<bigint> {
+        if (!this.walletAddress) return 0n;
+        const publicClient = this.publicClients.get(chainId);
+        const usdcAddress = USDC_ADDRESSES[chainId];
+        if (!publicClient || !usdcAddress) return 0n;
+
+        try {
+            const balance = await publicClient.readContract({
+                address: usdcAddress as `0x${string}`,
+                abi: [{
+                    name: 'balanceOf',
+                    type: 'function',
+                    stateMutability: 'view',
+                    inputs: [{ name: 'account', type: 'address' }],
+                    outputs: [{ type: 'uint256' }],
+                }],
+                functionName: 'balanceOf',
+                args: [this.walletAddress as `0x${string}`],
+            });
+            return balance as bigint;
+        } catch (error) {
+            logger.error(`[plugin-lifi] Failed to get USDC balance on chain ${chainId}:`, error);
+            return 0n;
+        }
     }
 
     canBuy(agentId: string, ticker: string, sizeUSD: number): { ok: boolean; reason: string } {

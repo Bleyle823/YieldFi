@@ -32,8 +32,8 @@ export const executeBuyAction: Action = {
         options: Record<string, any> = {},
         callback?: HandlerCallback,
     ): Promise<ActionResult> => {
-        const service = runtime.getService<LiFiService>(LiFiService.serviceType);
-        if (!service) return { success: false, error: new Error('LiFiService not available') };
+        const service = runtime.getService<LiFiService>(LiFiService.serviceType as any);
+        if (!service) return { success: false, error: 'LiFiService not available' as any };
 
         const ticker = options.ticker ?? extractTicker(message.content.text ?? '');
         const amountUSD = options.amountUSD ?? DEFAULT_POSITION_SIZE_USD;
@@ -43,7 +43,7 @@ export const executeBuyAction: Action = {
         const agentName = runtime.character?.name ?? agentId;
 
         if (!ticker || !MEME_COINS[ticker]) {
-            return { success: false, error: new Error(`Unknown ticker: ${ticker}`) };
+            return { success: false, error: `Unknown ticker: ${ticker}` as any };
         }
 
         // Risk check
@@ -68,16 +68,67 @@ export const executeBuyAction: Action = {
 
             if (callback) {
                 await callback({
-                    text: `🔄 Fetching LI.FI quote for $${amountUSD} USDC → $${ticker} on ${coin.chainKey}...`,
+                    text: `🔄 Checking balances for $${amountUSD} USDC → $${ticker} on ${coin.chainKey}...`,
+                    actions: ['LIFI_EXECUTE_BUY'],
+                });
+            }
+
+            // --- Auto-Bridging Logic ---
+            const targetChainId = coin.chainId;
+            let fromChainId = targetChainId;
+            let fromTokenAddress = fromToken;
+
+            // Check balance on target chain first
+            const targetBalance = await service.getUsdcBalance(targetChainId);
+            const requiredBalance = BigInt(fromAmount);
+
+            if (targetBalance < requiredBalance) {
+                logger.info(`[LIFI_EXECUTE_BUY] Insufficient USDC on target chain ${coin.chainKey}. Balance: ${targetBalance}, Required: ${requiredBalance}. Checking fallback chains...`);
+
+                // Prioritized fallback chains for liquidity
+                const fallbackChains = [CHAIN_IDS.ARB, CHAIN_IDS.ETH, CHAIN_IDS.BASE, CHAIN_IDS.OPT, CHAIN_IDS.POL];
+                let foundLiquidity = false;
+
+                for (const fallbackChain of fallbackChains) {
+                    if (fallbackChain === targetChainId) continue;
+
+                    const fallbackBalance = await service.getUsdcBalance(fallbackChain);
+                    if (fallbackBalance >= requiredBalance) {
+                        fromChainId = fallbackChain;
+                        fromTokenAddress = USDC_ADDRESSES[fallbackChain];
+                        foundLiquidity = true;
+
+                        logger.info(`[LIFI_EXECUTE_BUY] Found sufficient USDC on fallback chain ${fallbackChain}. Bridging from ${fallbackChain} to ${targetChainId}.`);
+                        if (callback) {
+                            await callback({
+                                text: `🌉 Insufficient balance on ${coin.chainKey}. Bridging USDC from chain ${fallbackChain} to ${coin.chainKey}...`,
+                                actions: ['LIFI_EXECUTE_BUY'],
+                            });
+                        }
+                        break;
+                    }
+                }
+
+                if (!foundLiquidity) {
+                    throw new Error(`Insufficient USDC balance across all checked chains for ${amountUSD} USD purchase.`);
+                }
+            } else {
+                logger.info(`[LIFI_EXECUTE_BUY] Sufficient USDC found on target chain ${coin.chainKey}.`);
+            }
+            // ---------------------------
+
+            if (callback) {
+                await callback({
+                    text: `🔄 Fetching LI.FI quote for $${amountUSD} USDC → $${ticker} (Source Chain: ${fromChainId} → Target Chain: ${targetChainId})...`,
                     actions: ['LIFI_EXECUTE_BUY'],
                 });
             }
 
             // 1. Get quote
             const quote = await getQuote({
-                fromChain: coin.chainId,
-                toChain: coin.chainId,
-                fromToken,
+                fromChain: fromChainId,
+                toChain: targetChainId,
+                fromToken: fromTokenAddress,
                 toToken,
                 fromAmount,
                 fromAddress: service.walletAddress!,
@@ -102,9 +153,9 @@ export const executeBuyAction: Action = {
                     }
                 },
                 // Auto-accept exchange rate changes < 3%
-                acceptExchangeRateUpdateHook: (_toToken, oldAmount, newAmount) => {
-                    const pct = Math.abs((parseFloat(newAmount) - parseFloat(oldAmount)) / parseFloat(oldAmount));
-                    return Promise.resolve(pct < 0.03);
+                acceptExchangeRateUpdateHook: async (updateParam) => {
+                    const pct = Math.abs((parseFloat(updateParam.newToAmount) - parseFloat(updateParam.oldToAmount)) / parseFloat(updateParam.oldToAmount));
+                    return pct < 0.03;
                 },
             });
 
@@ -169,7 +220,7 @@ export const executeBuyAction: Action = {
             if (callback) {
                 await callback({ text: `❌ Buy failed: ${errEvent.reason}`, actions: ['LIFI_EXECUTE_BUY'] });
             }
-            return { success: false, error: error instanceof Error ? error : new Error(String(error)) };
+            return { success: false, error: (error instanceof Error ? error.message : String(error)) as any };
         }
     },
 

@@ -3,10 +3,11 @@ import type { DrizzleDB } from '../types';
 import { getRow } from '../../types';
 
 export class MigrationTracker {
-  constructor(private db: DrizzleDB) {}
+  constructor(private db: DrizzleDB) { }
 
   async ensureSchema(): Promise<void> {
-    await this.db.execute(sql`CREATE SCHEMA IF NOT EXISTS migrations`);
+    console.log('[DEBUG] Executing CREATE SCHEMA IF NOT EXISTS "migrations"...');
+    await this.db.execute(sql.raw(`CREATE SCHEMA IF NOT EXISTS "migrations"`));
   }
 
   async ensureTables(): Promise<void> {

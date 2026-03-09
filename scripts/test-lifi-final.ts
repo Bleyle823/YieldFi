@@ -58,35 +58,36 @@ async function testActions() {
     // Explicitly init plugin
     await lifiPlugin.init!({}, runtime);
 
-    const service = runtime.getService<LiFiService>(LiFiService.serviceType);
+    let service = runtime.services ? runtime.services.get(LiFiService.serviceType) as LiFiService : undefined;
     if (!service) {
-        throw new Error('LiFiService not found');
+        service = await LiFiService.start(runtime);
     }
+    runtime.getService = ((type: string) => {
+        if (type === LiFiService.serviceType || type === 'lifi') return service;
+        return undefined;
+    }) as any;
 
     console.log('--- Testing LIFI_EXECUTE_BUY ---');
     // This will likely fail in getQuote/executeRoute because 0.5 USDC is too small
     // but we want to see a PROPER error result, not legacyResult: { success: false, error: {} }
-    const result = await runtime.processActions(
+    const { executeBuyAction } = await import('../packages/plugin-lifi/src/actions/executeBuy.action');
+    const result = await executeBuyAction.handler(
+        runtime,
         {
             id: randomUUID() as any,
             entityId: runtime.agentId,
             roomId: runtime.agentId,
-            content: { text: 'buy $BRETT', actions: ['LIFI_EXECUTE_BUY'] }
+            content: { text: 'buy $PEPE narrative is hot', actions: ['LIFI_EXECUTE_BUY'] }
         } as any,
-        [{
-            id: randomUUID() as any,
-            entityId: runtime.agentId,
-            roomId: runtime.agentId,
-            content: { text: 'BOUGHT $BRETT', actions: ['LIFI_EXECUTE_BUY'] }
-        }] as any,
         undefined,
+        { amountUSD: 0.5 },
         async (msg) => {
             console.log('Callback:', msg.text);
             return [];
         }
     );
 
-    console.log('Final Result Structure:', JSON.stringify(result, null, 2));
+    console.log('Final Result Structure:', JSON.stringify({ success: result?.success, error: (result?.error as any)?.message || result?.error }, null, 2));
 
     process.exit(0);
 }
