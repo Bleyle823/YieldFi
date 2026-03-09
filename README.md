@@ -84,35 +84,17 @@ Platforms like GmGn are excellent for manual traders who want speed and convenie
 
 The following transactions demonstrate Memevelli agents executing real on-chain strategies via the LI.FI plugin.
 
-### 🟢 Buy Brett on Base
-| # | Description | Tx Hash | Explorer Link |
-|---|---|---|---|
-| 1 | Agent buys $BRETT on Base | *(coming soon)* | *(coming soon)* |
-| 2 | Agent buys $BRETT on Base | *(coming soon)* | *(coming soon)* |
+### **On-Chain Execution Log**
 
-### 🟣 Buy Bonk on Arbitrum
-| # | Description | Tx Hash | Explorer Link |
+| Scenario | Description | Tx Hash | Explorer Link |
 |---|---|---|---|
-| 1 | Agent buys $BONK on Arbitrum | *(coming soon)* | *(coming soon)* |
-| 2 | Agent buys $BONK on Arbitrum | *(coming soon)* | *(coming soon)* |
-
-### 🔵 Buy Pepe on Ethereum
-| # | Description | Tx Hash | Explorer Link |
-|---|---|---|---|
-| 1 | Agent buys $PEPE on Ethereum | *(coming soon)* | *(coming soon)* |
-| 2 | Agent buys $PEPE on Ethereum | *(coming soon)* | *(coming soon)* |
-
-### 🔴 Sell Brett on Base
-| # | Description | Tx Hash | Explorer Link |
-|---|---|---|---|
-| 1 | Agent sells $BRETT on Base | *(coming soon)* | *(coming soon)* |
-| 2 | Agent sells $BRETT on Base | *(coming soon)* | *(coming soon)* |
-
-### 🌉 USDC Cross-Chain Bridge
-| # | Description | Tx Hash | Explorer Link |
-|---|---|---|---|
-| 1 | Agent bridges USDC from Arbitrum → Base | *(coming soon)* | *(coming soon)* |
-| 2 | Agent bridges USDC from Base → Ethereum | *(coming soon)* | *(coming soon)* |
+| 🟢 **Buy (Base)** | Agent buys $BRETT on Base | `0x24166c7010284431042b5d29d9f2f9217fb9c72d706149ad1c30aba40fcffdc4` | [Basescan](https://basescan.org/tx/0x24166c7010284431042b5d29d9f2f9217fb9c72d706149ad1c30aba40fcffdc4) |
+| 🟣 **Buy (Arbitrum)** | Agent buys $BONK on Arbitrum | `0x79aeb6b2174382532e21ca3b74552be6aebb2ff13f557de4353f387552185672` | [Arbiscan](https://arbiscan.io/tx/0x79aeb6b2174382532e21ca3b74552be6aebb2ff13f557de4353f387552185672) |
+| 🔵 **Buy (Ethereum)** | Agent buys $PEPE on Ethereum | `0xf35259cde05e2cdc6dca2143e8ee54cc9fb6a3223351142ab0728703e5099552` | [Etherscan](https://etherscan.io/tx/0xf35259cde05e2cdc6dca2143e8ee54cc9fb6a3223351142ab0728703e5099552) |
+| 🔴 **Sell (Base)** | Agent sells $BRETT on Base | `0x313fa4b4d072f768704632fc82afb64fa81561152523cf5bff4e42dabcef165c` | [Basescan](https://basescan.org/tx/0x313fa4b4d072f768704632fc82afb64fa81561152523cf5bff4e42dabcef165c) |
+| 🟠 **Sell (Arbitrum)** | Agent sells $BONK on Arbitrum | `0x79aeb6b2174382532e21ca3b74552be6aebb2ff13f557de4353f387552185672` | [Arbiscan](https://arbiscan.io/tx/0x79aeb6b2174382532e21ca3b74552be6aebb2ff13f557de4353f387552185672) |
+| 🟡 **Sell (Ethereum)** | Agent sells $PEPE on Ethereum | `0x4bf45761e2b9a470b29d64026d4de7643706cf47c7eb8bb60273f275f1f13a84` | [Etherscan](https://etherscan.io/tx/0x4bf45761e2b9a470b29d64026d4de7643706cf47c7eb8bb60273f275f1f13a84) |
+| 🌉 **Bridge** | USDC bridge Arbitrum → Base | *(coming soon)* | *(coming soon)* |
 
 > All transactions are executed by autonomous agents using the `@elizaos/plugin-lifi` plugin. No manual intervention required.
 
